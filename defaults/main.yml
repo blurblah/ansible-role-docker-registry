@@ -1,0 +1,3 @@
+---
+registry_web_port: 8080
+install_registry_web: false

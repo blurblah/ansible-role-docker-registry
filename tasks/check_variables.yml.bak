@@ -1,0 +1,15 @@
+---
+- name: Check certs_path variable
+  fail:
+    msg: Undefined variable certs_path
+  when: certs_path is undefined
+
+- name: Check cert_file variable
+  fail:
+    msg: Undefined variable cert_file
+  when: cert_file is undefined
+
+- name: Check key_file variable
+  fail:
+    msg: Undefined variable key_file
+  when: key_file is undefined

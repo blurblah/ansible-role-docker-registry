@@ -1,0 +1,8 @@
+registry:
+  url: https://{{ cert_domain }}/v2
+  name: {{ cert_domain }}
+  readonly: false
+  auth:
+    enabled: true
+    issuer: {{ cert_issuer }}
+    key: /conf/{{ key | basename }}

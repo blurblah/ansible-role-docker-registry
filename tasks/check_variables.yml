@@ -1,0 +1,25 @@
+---
+- name: Check cert variable
+  fail:
+    msg: Undefined variable cert
+  when: cert is undefined
+
+- name: Check key variable
+  fail:
+    msg: Undefined variable key
+  when: key is undefined
+
+- name: Check cert_issuer variable
+  fail:
+    msg: Undefined variable cert_issuer
+  when: cert_issuer is undefined
+
+- name: Check cert_domain variable
+  fail:
+    msg: Undefined variable cert_domain
+  when: cert_domain is undefined
+
+- name: Check cert_email variable
+  fail:
+    msg: Undefined variable cert_email
+  when: cert_email is undefined

@@ -1,0 +1,43 @@
+---
+- name: Make directory for registry
+  shell: mkdir -p /opt/registry/conf
+
+- name: Copy a registry configuration file
+  template:
+    src: registry.yml.j2
+    dest: /opt/registry/conf/registry.yml
+
+- name: Install docker registry
+  docker_container:
+    name: registry
+    image: registry:2.5
+    ports:
+      - 443:443
+    volumes:
+      - /opt/registry/conf/registry.yml:/etc/docker/registry/config.yml:ro
+      - '{{ cert }}:/etc/docker/registry/{{ cert | basename }}:ro'
+      - '{{ key }}:/etc/docker/registry/{{ key | basename }}:ro'
+    env:
+      REGISTRY_HTTP_TLS_CERTIFICATE: '/etc/docker/registry/{{ cert | basename }}'
+      REGISTRY_HTTP_TLS_KEY: '/etc/docker/registry/{{ key | basename }}'
+    recreate: yes
+    restart_policy: unless-stopped
+
+- name: Copy a registry web configuration file
+  template:
+    src: registry-web.yml.j2
+    dest: /opt/registry/conf/registry-web.yml
+
+- name: Install docker registry web
+  docker_container:
+    name: registry-web
+    image: hyper/docker-registry-web
+    ports:
+      - '{{ registry_web_port }}:8080'
+    volumes:
+      - /opt/registry/conf/registry-web.yml:/conf/config.yml:ro
+      - '{{ key }}:/conf/{{ key | basename }}:ro'
+      - /opt/registry/db:/data
+    recreate: yes
+    restart_policy: unless-stopped
+  when: install_registry_web

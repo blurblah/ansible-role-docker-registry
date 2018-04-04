@@ -1,0 +1,7 @@
+---
+dependencies:
+  - role: docker
+    install_docker_py: true
+  - role: letsencrypt
+    domain: '{{ cert_domain }}'
+    email: '{{ cert_email }}'

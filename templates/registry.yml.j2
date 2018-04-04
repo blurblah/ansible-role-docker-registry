@@ -1,0 +1,21 @@
+version: 0.1
+storage:
+{% if s3 is defined %}
+  s3:
+    accesskey: {{ s3.access_key }}
+    secretkey: {{ s3.secret_key }}
+    region: {{ s3.region }}
+    bucket: {{ s3.bucket }}
+{% else %}
+  filesystem:
+    rootdirectory: /var/lib/registry
+{% endif %}
+http:
+  addr: 0.0.0.0:443
+
+auth:
+  token:
+    realm: http://{{ cert_domain }}:{{ registry_web_port }}/api/auth
+    service: {{ cert_domain }}
+    issuer: {{ cert_issuer }}
+    rootcertbundle: /etc/docker/registry/{{ cert | basename }}
