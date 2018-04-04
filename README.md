@@ -1,12 +1,18 @@
 # ansible-role-docker-registry
-Tested on Ansible 2.4.2 and Ubuntu 16.04  
-This role depends on docker and letsencrypt roles.
+
+Tested on Ansible 2.4.2 and Ubuntu 16.04
+
+This role depends on
+[docker](https://github.com/blurblah/ansible-role-docker) and
+[letsencrypt](https://github.com/blurblah/ansible-role-letsencrypt) roles.
 
 ## Playbook sample
-Setup docker registry and web ui optionally.  
-registry_web_port (optional) : default is 8080  
-s3 (optional) : If this is unset, local disk will be backend storage.  
-install_registry_web: If set, registry web will be installed.
+Setup docker registry and web ui optionally.
+
+* **registry_web_port (optional)** : default is 8080
+* **s3 (optional)** : If this is unset, local disk will be backend storage.
+* **install_registry_web (optional)** : If set, registry web will be installed. Default value is false.
+
 ```yaml
 - hosts: registry
   become: yes
