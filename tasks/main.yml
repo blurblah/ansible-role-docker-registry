@@ -1,4 +1,7 @@
 ---
+- import_tasks: check_system.yml
+- import_tasks: check_variables.yml
+
 - name: Make directory for registry
   shell: mkdir -p /opt/registry/conf
 
